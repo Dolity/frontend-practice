@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  /* Design Tokens - Colors */
+  --color-text-primary: #000000;
+  --color-text-secondary: #6b7280;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f3f4f6;
+  --color-bg-header: #e5e7eb;
+  --color-bg-footer: #e5e7eb;
+  --color-accent-primary: #3b82f6;
+  --color-accent-hover: #93c5fd;
+  --color-accent-button: #fef08a;
+  
+  /* Button Tokens */
+  --color-btn-primary-bg: #3b82f6;
+  --color-btn-primary-text: #000000;
+  --color-btn-primary-hover: #2563eb;
+  --color-btn-secondary-bg: #ffffff;
+  --color-btn-secondary-text: #000000;
+  --color-btn-secondary-hover: #4b5563;
+}
+
+/* Dark mode design tokens */
+.dark {
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #9ca3af;
+  --color-bg-primary: #030712;
+  --color-bg-secondary: #1f2937;
+  --color-bg-header: #1f2937;
+  --color-bg-footer: #1f2937;
+  --color-accent-primary: #60a5fa;
+  --color-accent-hover: #1e3a8a;
+  --color-accent-button: #713f12;
+  
+  /* Button Tokens - Dark Mode */
+  --color-btn-primary-bg: #60a5fa;
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-hover: #3b82f6;
+  --color-btn-secondary-bg: #9ca3af;
+  --color-btn-secondary-text: #ffffff;
+  --color-btn-secondary-hover: #6b7280;
+}
+
+/* Custom utilities using design tokens */
+@layer utilities {
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+  .bg-header {
+    background-color: var(--color-bg-header);
+  }
+  .bg-footer {
+    background-color: var(--color-bg-footer);
+  }
+  .hover-accent:hover {
+    background-color: var(--color-accent-hover);
+  }
+  .hover-accent-button:hover {
+    background-color: var(--color-accent-button);
+  }
+  
+  /* Button utilities */
+  .btn-primary {
+    background-color: var(--color-btn-primary-bg);
+    color: var(--color-btn-primary-text);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-btn-primary-hover);
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-btn-secondary-bg);
+    color: var(--color-btn-secondary-text);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-btn-secondary-hover);
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html,
+body {
+  @apply bg-white dark:bg-gray-950 font-sans antialiased;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
