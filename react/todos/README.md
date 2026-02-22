@@ -1,87 +1,110 @@
-# Welcome to React Router!
+# Todos App — React Project
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A simple **Todo List** application built with React as the first hands-on project in this learning repository. The purpose is to practice React fundamentals through a classic CRUD application.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## What This Project Covers
 
-## Features
+- **Functional components** — building UI from composable pieces
+- **`useState`** — managing local component state (todo list, input values)
+- **`useEffect`** — reacting to state/prop changes, side effects
+- **Props** — passing data and callbacks between parent and child components
+- **Event handling** — form submissions, button clicks, input changes
+- **Conditional rendering** — showing/hiding UI based on state
+- **List rendering** — mapping over arrays with proper `key` props
+- **React Router v7** — file-based routing, loaders, and actions
+- **Forms** — controlled inputs and form submission patterns
+- **TypeScript** — typing props, state, and event handlers
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Tech Stack
+
+- **React 19** with **TypeScript**
+- **React Router v7** (file-based routing, SSR-capable)
+- **TailwindCSS v4** for styling
+- **Vite** as the build tool
+- **Bun** as the package manager
+
+## Project Structure
+
+```
+todos/
+├── app/
+│   ├── components/       # Reusable UI components (e.g., TodoItem, TodoForm)
+│   ├── routes/           # Route-level page components
+│   ├── model/            # Data models and business logic
+│   ├── routes.ts         # Route definitions
+│   ├── root.tsx          # App root layout
+│   └── app.css           # Global styles
+├── public/               # Static assets
+├── package.json
+├── vite.config.ts
+└── tsconfig.json
+```
 
 ## Getting Started
 
-### Installation
-
-Install the dependencies:
+### Install dependencies
 
 ```bash
+bun install
+# or
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
+### Run the development server
 
 ```bash
+bun run dev
+# or
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+The app will be available at `http://localhost:5173`.
 
-## Building for Production
-
-Create a production build:
+### Build for production
 
 ```bash
+bun run build
+# or
 npm run build
 ```
 
-## Deployment
+## Key Concepts Practiced
 
-### Docker Deployment
+### State Management with `useState`
 
-To build and run using Docker:
+```tsx
+const [todos, setTodos] = useState<Todo[]>([]);
 
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+const addTodo = (text: string) => {
+  setTodos([...todos, { id: Date.now(), text, done: false }]);
+};
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+### Side Effects with `useEffect`
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+```tsx
+useEffect(() => {
+  // Runs after every render where `todos` changed
+  localStorage.setItem("todos", JSON.stringify(todos));
+}, [todos]);
 ```
 
-## Styling
+### React Router — Loader & Action Pattern
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+```tsx
+export async function loader() {
+  return getTodos();
+}
 
----
+export async function action({ request }: ActionFunctionArgs) {
+  const form = await request.formData();
+  return createTodo(form.get("text") as string);
+}
+```
 
-Built with ❤️ using React Router.
+## Features
+
+- Add new todos
+- Mark todos as complete / incomplete
+- Delete todos
+- Persistent state (via React Router loaders or localStorage)
