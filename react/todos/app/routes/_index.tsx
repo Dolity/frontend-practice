@@ -53,7 +53,7 @@ export default function Todo() {
             </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-15 text-primary">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-15 text-secondary">
             <div className="bg-gray-50 rounded-xl shadow-lg p-6 hover:shadow-xl hover:-translate-y-2 transition-all">
               <div className="bg-blue-100 rounded-xl p-2 size-fit">
               <AddTaskIcon />

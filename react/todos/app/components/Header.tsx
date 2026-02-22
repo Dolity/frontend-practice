@@ -24,7 +24,7 @@ export default function Header() {
 
     return (
         <>
-        <header className="navbar flex justify-between py-2 px-4 bg-header">
+        <header className="navbar flex justify-between py-2 px-4 bg-header sticky top-0">
             <div>
                 <h1 className="text-xl text-primary">Todos</h1>
             </div>
